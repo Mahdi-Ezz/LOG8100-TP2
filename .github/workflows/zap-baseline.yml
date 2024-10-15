@@ -2,7 +2,7 @@ on:
   push:
     branches:
       - main  
-name: Zap Scan
+name: Zap Baseline Scan
 jobs:
   zap_scan:
     runs-on: ubuntu-latest
