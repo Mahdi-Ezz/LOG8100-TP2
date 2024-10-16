@@ -6,14 +6,9 @@ var Sequelize = require("sequelize");
 var env = process.env.NODE_ENV || "development";
 var config = require("../config/db.js")
 
-if (process.env.DATABASE_URL) {
-  var sequelize = new Sequelize("dburl");
-} else {
-  var sequelize = new Sequelize("db", "db", "db", {
-    host: "db",
-    dialect: "postgres"
-  });
-}
+console.log(process.env.DATABASE_URL)
+var sequelize = new Sequelize(process.env.DATABASE_URL);
+
 
 sequelize
   .authenticate()
@@ -25,7 +20,7 @@ sequelize
   })
 
 sequelize
-  .sync( /*{ force: true }*/ ) // Force To re-initialize tables on each run
+  .sync( /*{ force: true }*/) // Force To re-initialize tables on each run
   .then(function (err) {
     console.log('It worked!');
   }, function (err) {
