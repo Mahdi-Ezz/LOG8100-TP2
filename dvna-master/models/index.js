@@ -7,7 +7,16 @@ var env = process.env.NODE_ENV || "development";
 var config = require("../config/db.js")
 
 console.log(process.env.DATABASE_URL)
-var sequelize = new Sequelize(process.env.DATABASE_URL);
+var sequelize = new Sequelize({
+  "url": process.env.DATABASE_URL,
+  "dialect": "postgres",
+  "ssl": true,
+  "dialectOptions": {
+    "ssl": {
+      "require": true
+    }
+  }
+});
 
 
 sequelize
