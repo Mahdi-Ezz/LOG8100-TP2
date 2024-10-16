@@ -4,6 +4,6 @@ WORKDIR /dvna
 
 COPY . .
 
-RUN chmod +x /dvna/docker-entrypoint.sh && npm install
+RUN npm install
 
 CMD ["npm", "start"]

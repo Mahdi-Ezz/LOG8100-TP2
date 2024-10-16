@@ -5,12 +5,14 @@ var session = require('express-session')
 var ejs = require('ejs')
 var morgan = require('morgan')
 const fileUpload = require('express-fileupload');
+var config = require('./config/server')
+
 
 //Initialize Express
 var app = express()
 require('./core/passport')(passport)
 app.use(express.static('public'))
-app.set('view engine','ejs')
+app.set('view engine', 'ejs')
 app.use(morgan('tiny'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(fileUpload());
@@ -34,10 +36,8 @@ app.use(passport.session())
 app.use(require('express-flash')());
 
 // Routing
-app.use('/app',require('./routes/app')())
-app.use('/',require('./routes/main')(passport))
+app.use('/app', require('./routes/app')())
+app.use('/', require('./routes/main')(passport))
 
 // Start Server
-app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000');
-});
+app.listen(config.port, config.listen)
